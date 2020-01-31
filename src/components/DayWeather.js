@@ -28,10 +28,10 @@ return (
 				<div className="weatherCard">
 					<h2>Current weather</h2> 
 					<h1>{context.appData.name}</h1>
-					<figure><img src={process.env.PUBLIC_URL + '/assets/images/' + imageName + '.png'} /></figure>
+					<figure><img src={process.env.PUBLIC_URL + '/assets/images/' + imageName + '.png'} alt="" /></figure>
 					{context.appData.main}
-					<p className="weatherCard__temp">{Math.round(context.appData.temp)} &#176; {context.appData.units=="metric"?"C":"F"}</p>
-					<p className="weatherCard__feelslike">Feels like: {Math.round(context.appData.feelsLike)} &#176; {context.appData.units=="metric"?"C":"F"}</p>
+					<p className="weatherCard__temp">{Math.round(context.appData.temp)} &#176; {context.appData.units==="metric"?"C":"F"}</p>
+					<p className="weatherCard__feelslike">Feels like: {Math.round(context.appData.feelsLike)} &#176; {context.appData.units==="metric"?"C":"F"}</p>
 				</div>
 
 			)

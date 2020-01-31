@@ -1,4 +1,4 @@
-import React, {express} from 'react';
+import React from 'react';
 import ReactDOM from 'react-dom';
 
 import './styles/styles.scss';

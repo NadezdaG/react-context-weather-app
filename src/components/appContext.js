@@ -21,7 +21,7 @@ class AppContextProvider extends Component {
   // load data method
   loadData = () => {
 
-  const apiKey = "572cbdc18f6f1a1a8e3d659a5639cd1d";
+  const apiKey = process.env.REACT_APP_WEATHER_API_KEY
   const weatherURL = "https://api.openweathermap.org/data/2.5/weather?q="+this.state.name+"&units="+this.state.units+"&APPID="+apiKey
 
 	  // take data and move to the state
