@@ -1,0 +1,33 @@
+@import "./variables.scss";
+
+button, a {outline: none; }
+
+/* Older browsers */
+html { font-size: $base-font-size; font-family:$font-family; color:$color-black;}
+
+
+
+/* Modern browsers only need this one */
+
+@media screen and (min-width: 25em){
+  html { font-size: calc( $base-font-size + (24 - 16) * (100vw - 400px) / (800 - 400) ); }
+}
+
+/* Safari <8 and IE <11 */
+@media screen and (min-width: 25em){
+  html { font-size: calc( $base-font-size + (24 - 16) * (100vw - 400px) / (800 - 400) ); }
+}
+@media screen and (min-width: 50em){
+
+html { font-size: calc( $base-font-size + (24 - 16) * (100vw - 400px) / (800 - 400) ); }
+}
+
+#weatherApp {
+	display:block;
+	width:90%;
+	max-width:400px;
+	min-width:300px;
+	padding:0;
+	margin:2em auto;
+	text-align:center;
+}
