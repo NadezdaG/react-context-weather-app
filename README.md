@@ -2,18 +2,22 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 #############
 
-This project is created for learning Reactjs + Context  by Nadezda Gurska
+This project is created for learning Reactjs + Context  
+by Nadezda Gurska
 
 Problems to solve:
 1) Create context - done
 2) update context from api - done
 3) update context using toggle - done
-4) load images depending on text
+4) load images depending on text - done
 5) load city using Location
 6) Use loader
 7) show message if API isn't available
 
 #############
+https://openweathermap.org/
+Create the .env.local file for Open Weather API key - 
+REACT_APP_WEATHER_API_KEY=XXX
 
 
 ## Available Scripts
