@@ -1,19 +1,12 @@
-import React, {useContext} from "react"
+import React from 'react';
 import '../styles/UnitToggler.scss';
-import {AppContext} from "./appContext";
 
-const UnitToggler = (props) => {
-const context = useContext(AppContext);
-
-return (
-
-				<div className="unitToggler">
-						<button onClick={context.toggleUnits}>&#176; {context.appData.units==="metric"?"F":"C"} </button>
-				</div>
-
-			)
-}
-
-
+const UnitToggler = ({ units, toggleUnits }) => {
+    return (
+        <div className='unitToggler'>
+            <button onClick={toggleUnits}>&#176; {units === 'metric' ? 'F' : 'C'} </button>
+        </div>
+    );
+};
 
 export default UnitToggler;
