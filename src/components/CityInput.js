@@ -28,7 +28,7 @@ const CityInput = (props) => {
 		return (
 
 						<div className="cityInput">
-							<input id="cityNameInput" type="text" name='city' onChange={(e)=>onChange(e.target.value)}  />
+							<input id="cityNameInput" autocomplete="off" placeholder="Type your city" type="text" name='city' onChange={(e)=>onChange(e.target.value)}  />
 			        <ul className="cityContainer">
 				        {cities.map(item => (
 				          <li key={item} onClick={(e)=>{setCities([]);document.getElementById("cityNameInput").value="";context.loadData(item)}} >{item}</li>
