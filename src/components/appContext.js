@@ -41,7 +41,7 @@ class AppContextProvider extends Component {
         console.log("Your latitude is :" + lat + " and longitude is " + long);
       }
 
-      weatherURL = `https://api.openweathermap.org/data/2.5/weather?lat=${Math.round(
+      weatherURL = `https://api.openweathermap.org/data/2.5/forecast?lat=${Math.round(
         lat
       )}&lon=${Math.round(long)}&units=${this.state.units}&APPID=${apiKey}`;
     }
@@ -55,11 +55,12 @@ class AppContextProvider extends Component {
         }
       })
       .then(data => {
+        console.log(data);
         if (data.list) {
           this.setState({
             name: data.name,
             weatherToday: {
-              temp: data.list[0].main,
+              temp: data.list[0].main.temp,
               feelsLike: data.list[0].main.feels_like,
               main: data.list[0].weather[0].main,
               mainid: data.list[0].weather[0].id,
@@ -86,7 +87,7 @@ class AppContextProvider extends Component {
               mainid: data.list[23].weather[0].id,
               description: data.list[23].weather[0].description
             },
-            weatherInThreeDays: {
+            weatherInFourDays: {
               temp: data.list[31].main,
               feelsLike: data.list[31].main.feels_like,
               main: data.list[31].weather[0].main,
