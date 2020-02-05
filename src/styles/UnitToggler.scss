@@ -1,11 +1,7 @@
 @import "./_variables.scss";
 @import "./_mixins.scss";
 .unitToggler {
-    background-color: $color-black;
-    border-top-right-radius: $radius;
-    border-top-left-radius: $radius;
-    padding: 0em;
-    text-align: right;
+
     button {
         background-color: lighten($color-black, 20%);
         padding: 20px;

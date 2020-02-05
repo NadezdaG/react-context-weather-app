@@ -17,7 +17,7 @@ if ((context.appData.mainid===800)||(context.appData.mainid===801)||(context.app
 
 useEffect(() => {
   console.log('use effect');
-  context.loadData(context.appData.units)
+  context.loadData("start")
 },[context.appData.units]); // to load data only once
 
 

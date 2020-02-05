@@ -1,4 +1,8 @@
-import React, { Component, createContext, useEffect } from 'react'
+import React, {
+    Component,
+    createContext,
+    useEffect
+} from 'react'
 
 export const AppContext = createContext()
 
@@ -7,64 +11,115 @@ export const AppContext = createContext()
 
 class AppContextProvider extends Component {
 
-	//default state
-   state = {
-  	  units: "metric",
-			name: "London",
-			temp: "loading...",
-			feelsLike: 'loading...',
-			main: "loading...",
-			mainid: "",
-			description: "loading..."
-  }
-
-  // load data method
-  loadData = () => {
-
-  const apiKey = process.env.REACT_APP_WEATHER_API_KEY
-  const weatherURL = "https://api.openweathermap.org/data/2.5/weather?q="+this.state.name+"&units="+this.state.units+"&APPID="+apiKey
-
-	  // take data and move to the state
-    fetch(weatherURL)
-	    .then(res => res.json())
-	    .then(data => {
-		    console.log(data);
-				 this.setState({
-				  	name: data.name,
-						temp: data.main.temp,
-						feelsLike: data.main.feels_like,
-						main: data.weather[0].main,
-						mainid:data.weather[0].id,
-						description: data.weather[0].description	  	
-				  })
-	    }).catch(function(message) {
-        console.log(message);
-    });
-
-  }
-
-  // toggle units
-  toggleUnits = () => {
-  	let newUnits = this.state.units==="metric" ? "imperial" : "metric"
-    this.setState({
-    	units: newUnits
+    //default state
+    state = {
+        units: "metric",
+        name: "Venice",
+        temp: "loading...",
+        feelsLike: 'loading...',
+        main: "loading...",
+        mainid: "",
+        description: "loading..."
     }
-  );
-  };
 
-  getLocation(){
+    // load data method
+    loadData = (input) => {
+        const apiKey = process.env.REACT_APP_WEATHER_API_KEY
+        var weatherURL = `https://api.openweathermap.org/data/2.5/weather?q=${input}&units=${this.state.units}&APPID=${apiKey}`
 
-    // Get the current position of the user
-    
-   }
+        //if first render - try to get geo location
+        if (input === "start") {
+            var lat = "";
+            var long = "";
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(successFunction);
+            } else {
+                alert('It seems like Geolocation, which is required for this page, is not enabled in your browser. Please use a browser which supports it.');
+            }
 
-render () {
-  return (
-    <AppContext.Provider value={{ appData: this.state, toggleUnits: this.toggleUnits, loadData: this.loadData }}>
-        {this.props.children}
-    </AppContext.Provider>
-  )
+            function successFunction(position) {
+                console.log(position);
+                lat = position.coords.latitude;
+                long = position.coords.longitude;
+                console.log('Your latitude is :' + lat + ' and longitude is ' + long);
+            }
+
+            weatherURL = `https://api.openweathermap.org/data/2.5/weather?lat=${Math.round(lat)}&lon=${Math.round(long)}&units=${this.state.units}&APPID=${apiKey}`
+        }
+
+        // take data and move to the state
+        fetch(weatherURL)
+            .then((res) => {
+                if (res.status != "200") return;
+                else {
+                    return res.json()
+                }
+            })
+            .then(data => {
+                if (data) {
+                    this.setState({
+                        name: data.name,
+                        temp: data.main.temp,
+                        feelsLike: data.main.feels_like,
+                        main: data.weather[0].main,
+                        mainid: data.weather[0].id,
+                        description: data.weather[0].description
+                    })
+                }
+            }).catch(function(message) {
+                console.log(message);
+            });
+
+    }
+
+    // toggle units
+    toggleUnits = () => {
+        let newUnits = this.state.units === "metric" ? "imperial" : "metric"
+        this.setState({
+            units: newUnits
+        })
+    }
+
+    changeCity = (city) => {
+        fetch("https://restcountries.eu/rest/v2/all")
+            .then((res) => {
+                if (res.status != "200") return;
+                else {
+                    return res.json()
+                }
+            })
+            .then(data => {
+                if (data) {
+
+                    let cities = data.map((city) => city.capital)
+                    let regex = new RegExp(city, 'i')
+                    let citiesList = cities.filter((city) => city.match(regex))
+                        .map((city) => `<li onClick=${()=>this.loadData(city)}>${city}</li>`).join("")
+
+                    document.querySelector(".cityContainer").innerHTML = citiesList;
+                }
+            }).catch(function(message) {
+                console.log(message);
+            });
+        //this.loadData(city)
+    }
+
+
+    render() {
+        return ( <
+            AppContext.Provider value = {
+                {
+                    appData: this.state,
+                    toggleUnits: this.toggleUnits,
+                    changeCity: this.changeCity,
+                    loadData: this.loadData
+                }
+            } > {
+                this.props.children
+            } <
+            /AppContext.Provider>
+        )
+    }
 }
-}
 
-export default AppContextProvider 
+export default AppContextProvider

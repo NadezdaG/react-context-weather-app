@@ -1,6 +1,7 @@
 import React from 'react';
 import DayWeather from './DayWeather';
 import UnitToggler from './UnitToggler';
+import CityInput from './CityInput';
 //import CitySelector from './CitySelector';
 
 import AppContextProvider from "./appContext";
@@ -10,7 +11,10 @@ class App extends React.Component {
 	return (
 		<AppContextProvider>
 			<div id="weatherApp">
-			  <UnitToggler />
+			  <header>
+				  <CityInput />
+				  <UnitToggler />
+			  </header>
 				<DayWeather />
 			</div>
 		</AppContextProvider>

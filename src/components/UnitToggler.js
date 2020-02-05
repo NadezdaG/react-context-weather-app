@@ -2,7 +2,7 @@ import React, {useContext} from "react"
 import '../styles/UnitToggler.scss';
 import {AppContext} from "./appContext";
 
-function UnitToggler(props) {
+const UnitToggler = (props) => {
 const context = useContext(AppContext);
 
 return (
