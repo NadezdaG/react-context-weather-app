@@ -1,10 +1,13 @@
 @import "./_variables.scss";
 @import "./_mixins.scss";
-.weatherCard {
-    background-color: #efefef;
-    padding: 3em;
+.weatherApp__card {
+    padding: 1.5em;
     border-bottom-right-radius: $radius;
     border-bottom-left-radius: $radius;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
     h1, h2 {
         padding: 0;
         margin: 0;
@@ -15,15 +18,50 @@
     h1 {
         font-size: 3em;
     }
-    .weatherCard__temp {
+    &__temp {
         font-size: 2em;
     }
+    &__feelslike {
+        font-size: 0.8em;
+        color: lighten($color-black, 30%);
+    }
     figure {
-        display: inline-block;
-        max-width: 300px;
+        width: 30%;
+        color: lighten($color-black, 30%);
         img {
             width: 100%;
+            max-width: 100px;
             height: auto;
+        }
+    }
+    &__content {
+        width: 70%;
+        text-align: left;
+        border-left: 1px solid lighten($color-black, 30%);
+        padding-left: 5%
+    }
+}
+
+.forecast {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding:0 2em;
+    font-size: 0.6em;
+    .weatherApp__card {
+        width: 30%;
+        padding: 0;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        figure {
+            width: 100%;
+        }
+        &__content {
+            width: 100%;
+            text-align: center;
+            border-left: none;
+            padding-left: 0
         }
     }
 }

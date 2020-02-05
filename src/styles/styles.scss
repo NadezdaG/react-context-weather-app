@@ -35,7 +35,9 @@ html { font-size: calc( $base-font-size + (24 - 16) * (100vw - 400px) / (800 - 4
 	padding:0;
 	margin:2em auto;
 	text-align:center;
-
+  background-color: #efefef;
+  border-radius: $radius;
+  padding-bottom:2em;
 	header {
     background-color: $color-black;
     border-top-right-radius: $radius;

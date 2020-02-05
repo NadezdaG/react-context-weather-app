@@ -13,13 +13,13 @@ class AppContextProvider extends Component {
 
     //default state
     state = {
-        units: "metric",
-        name: "Venice",
-        temp: "loading...",
-        feelsLike: 'loading...',
-        main: "loading...",
+        units: "",
+        name: "",
+        temp: "",
+        feelsLike: '',
+        main: "",
         mainid: "",
-        description: "loading..."
+        description: ""
     }
 
     // load data method
@@ -78,30 +78,6 @@ class AppContextProvider extends Component {
         this.setState({
             units: newUnits
         })
-    }
-
-    changeCity = (city) => {
-        fetch("https://restcountries.eu/rest/v2/all")
-            .then((res) => {
-                if (res.status != "200") return;
-                else {
-                    return res.json()
-                }
-            })
-            .then(data => {
-                if (data) {
-
-                    let cities = data.map((city) => city.capital)
-                    let regex = new RegExp(city, 'i')
-                    let citiesList = cities.filter((city) => city.match(regex))
-                        .map((city) => `<li onClick=${()=>this.loadData(city)}>${city}</li>`).join("")
-
-                    document.querySelector(".cityContainer").innerHTML = citiesList;
-                }
-            }).catch(function(message) {
-                console.log(message);
-            });
-        //this.loadData(city)
     }
 
 
