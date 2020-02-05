@@ -9,24 +9,24 @@ import AppContextProvider from "./appContext";
 
 class App extends React.Component {
 	render() {
-	return (
-		<AppContextProvider>
-			<div id="weatherApp">
-			  <header>
-				  <CityInput />
-				  <UnitToggler />
-			  </header>
-			  <CityName />
-				<DayWeather day="0" />
-				<div className="forecast">
-					 <DayWeather day="1" />
-					 <DayWeather day="2" />
-					 <DayWeather day="3" />
+		return (
+			<AppContextProvider>
+				<div id="weatherApp">
+				  <header>
+					  <CityInput />
+					  <UnitToggler />
+				  </header>
+				  <CityName />
+					<DayWeather day="0" />
+						<div className="forecast">
+							 <DayWeather day="1" />
+							 <DayWeather day="2" />
+							 <DayWeather day="3" />
+						</div>
 				</div>
-			</div>
-		</AppContextProvider>
+			</AppContextProvider>
 		)
-}
+	}
 }
 
 export default App;

@@ -8,7 +8,7 @@ button:focus {
 }
 
 /* Older browsers */
-html { font-size: $base-font-size; font-family:$font-family; color:$color-black;}
+html { font-size: $base-font-size; font-family:$font-family; color:$color-white;} 
 
 
 
@@ -32,20 +32,30 @@ html { font-size: calc( $base-font-size + (24 - 16) * (100vw - 400px) / (800 - 4
 	width:90%;
 	max-width:400px;
 	min-width:300px;
-	padding:0;
+	padding:2em 2em 5em;
 	margin:2em auto;
 	text-align:center;
-  background-color: #efefef;
-  border-radius: $radius;
-  padding-bottom:2em;
+  background: $color-main-bg;
+  color: $color-white;
 	header {
-    background-color: $color-black;
-    border-top-right-radius: $radius;
-    border-top-left-radius: $radius;
     padding: 0em;
     text-align: right;
     display:flex;
     flex-direction:row;
     justify-content:space-between;
+}
+.weatherApp__city {
+    padding:4em 0em 2em;
+    h1, h2 {
+        padding: 0;
+        margin: 0;
+        color:$color-white;
+    }
+    h2 {
+        font-size: 1em;
+    }
+    h1 {
+        font-size: 3em;
+    }
 }
 }
