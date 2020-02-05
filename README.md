@@ -12,6 +12,7 @@ Problems to solve:
 4) load images depending on text - done
 5) load city using Location - done
 6) input text and search city by text - done
+7) Forecast for 3 days
 
 #############
 https://openweathermap.org/
