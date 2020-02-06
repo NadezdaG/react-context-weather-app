@@ -3,10 +3,11 @@
 .unitToggler {
 
     button {
-        background-color: lighten($color-black, 20%);
+        background-color: $color-white;
         padding: 20px;
+        font-size:1.1em;
         border: none;
-        color: $color-white;
-        border-top-right-radius: $radius;
+        color: $color-main-bg;
+        border-radius: 100%;
     }
 }
