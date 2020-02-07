@@ -25,10 +25,12 @@ const WeatherProvider = (props) => {
   }
 
   const handleCityChange = (newCity) => {
+  	console.log(city)
   	setCity(newCity)
   	setLoading(true)
   	uploadData()
   	console.log('city change')
+  	console.log(city)
   	console.log(newCity)
   }
 
