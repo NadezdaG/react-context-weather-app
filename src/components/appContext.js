@@ -16,16 +16,19 @@ const WeatherProvider = props => {
   //state for city
   const [city, setCity] = useState("London");
 
-  // function to change units and reload data from API
+  // function to change units \\ units should be added to the useEffect to reload the data
   const unitToggler = () => {
     setUnits(units === "metric" ? "imperial" : "metric");
     setLoading(true);
   };
 
-  const handleCityChange = newCity => {
-    setCity(newCity);
-    setLoading(true);
-  };
+  }
+
+  //function to change city \\ city should be added to the useEffect to reload the data
+  const handleCityChange = (newCity) => {
+  	setCity(newCity)
+  	setLoading(true)
+  }
 
   // function to uplad data from API
   const uploadData = async () => {
