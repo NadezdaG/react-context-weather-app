@@ -3,15 +3,15 @@ import '../styles/UnitToggler.scss';
 import { WeatherContext } from "./appContext";
 
 const UnitToggler = (props) => {
-const appContext = useContext(WeatherContext)
+		const appContext = useContext(WeatherContext)
 
-return (
+		return (
 
-				<div className="unitToggler">
-						<button onClick={appContext.unitToggler}>&#176; {appContext.units==="metric"?"F":"C"} </button>
-				</div>
+						<div className="unitToggler">
+								<button onClick={appContext.unitToggler}>&#176; {appContext.units==="metric"?"F":"C"} </button>
+						</div>
 
-			)
+					)
 }
 
 

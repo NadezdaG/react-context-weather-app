@@ -39,7 +39,5 @@ const CityInput = (props) => {
 		)
 }
 
-//				          {(e) => handleSearchChange(e)} <li key={index} onClick={(e)=>{setCities([]);document.getElementById("cityNameInput").value="";changeCity("RIGA")}} >{item}</li>
-
 
 export default CityInput;

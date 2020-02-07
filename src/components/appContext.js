@@ -19,17 +19,17 @@ const WeatherProvider = (props) => {
 
   // function to change units and reload data from API
   const unitToggler = () => {
-  	setUnits((units=="metric")?"imperial":"metric");
+  	setUnits((units==="metric")?"imperial":"metric");
   	setLoading(true)
   	uploadData()
   }
 
   const handleCityChange = (newCity) => {
+  	console.log('city change')
   	console.log(city)
   	setCity(newCity)
   	setLoading(true)
   	uploadData()
-  	console.log('city change')
   	console.log(city)
   }
 
