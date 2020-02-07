@@ -1,47 +1,48 @@
 import React, { useContext, useEffect } from "react";
 import "../styles/DayWeather.scss";
-import { AppContext } from "./appContext";
+import { WeatherContext } from "./appContext";
 
 function DayWeather(props) {
-  const context = useContext(AppContext);
+  const appContext = useContext(WeatherContext);
+  const showDate = appContext.weather.list[props.day];
+  const days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
+  // Setting the image
   let imageName = "w-2"; // default image name
 
   if (
-    context.appData.mainid === 800 ||
-    context.appData.mainid === 801 ||
-    context.appData.mainid === 802 ||
-    context.appData.mainid === 803
+    showDate.weather[0].id === 800 ||
+    showDate.weather[0].id === 801 ||
+    showDate.weather[0].id === 802 ||
+    showDate.weather[0].id === 803
   ) {
     // set image depending on code
-    imageName = "w-" + context.appData.mainid;
+    imageName = "w-" + showDate.weather[0].id;
   } else {
     // set image if not full code found
-    imageName = "w-" + String(context.appData.mainid).split("")[0];
+    imageName = "w-" + String(showDate.weather[0].id).split("")[0];
   }
 
-  //Starrting app:
-  useEffect(() => {
-    context.loadData("start");
-  }, [context.appData.units]); // to load data only once
-  //   console.log(context.appData.weatherToday);
+  const date = new Date(showDate.dt * 1000);
+
   return (
     <div className="weatherApp__card">
+      {props.day !== "0" ? days[date.getDay()] : ""}
       <figure>
         <img
           src={process.env.PUBLIC_URL + "/assets/images/" + imageName + ".png"}
           alt=""
         />
         <br />
-        {context.appData.main}
+        {showDate.weather[0].main}
       </figure>
-      <div class="weatherApp__card__content">
+      <div className="weatherApp__card__content">
         <div className="weatherApp__card__temp">
-          {Math.round(context.appData.weatherToday)} &#176;{" "}
-          {context.appData.units === "metric" ? "C" : "F"}
+          {Math.round(showDate.main.temp)} &#176;{" "}
+          {appContext.units === "metric" ? "C" : "F"}
         </div>
         <div className="weatherApp__card__feelslike">
-          Feels like: {Math.round(context.appData.feelsLike)} &#176;{" "}
-          {context.appData.units === "metric" ? "C" : "F"}
+          Feels like: {Math.round(showDate.main.feels_like)} &#176;{" "}
+          {appContext.units === "metric" ? "C" : "F"}
         </div>
       </div>
     </div>

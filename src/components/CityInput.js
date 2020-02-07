@@ -1,14 +1,15 @@
 import React, {useContext, useState} from "react"
 import '../styles/CityInput.scss';
-import {AppContext} from "./appContext";
+import { WeatherContext } from "./appContext";
 
 // Initial city list:
 const initialCityList = [];
 
 const CityInput = (props) => {
-		const context = useContext(AppContext);
+		const appContext = useContext(WeatherContext)
 		const [cities, setCities] = useState(initialCityList);
 
+		//on type the text into the field - search the API
 		const onChange = inputText => {
 			 // select capital cities from the API
 		   fetch("https://restcountries.eu/rest/v2/all")
@@ -24,21 +25,19 @@ const CityInput = (props) => {
 		            });
 		}
 
-
 		return (
 
 						<div className="cityInput">
 							<input id="cityNameInput" autoComplete="off" placeholder="Type your city" type="text" name='city' onChange={(e)=>onChange(e.target.value)}  />
 			        <ul className="cityContainer">
 				        {cities.map((item,index) => (
-				          <li key={index} onClick={(e)=>{setCities([]);document.getElementById("cityNameInput").value="";context.loadData(item)}} >{item}</li>
+				          <li key={index} onClick={(e) => appContext.handleCityChange(item)}>{item}</li>
 				        ))}
 			        </ul>
 						</div>
 
 		)
 }
-
 
 
 export default CityInput;

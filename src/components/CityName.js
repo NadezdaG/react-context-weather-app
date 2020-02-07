@@ -1,21 +1,20 @@
 import React, {useContext, useEffect} from "react"
 //import '../styles/DayWeather.scss';
-import {AppContext} from "./appContext";
+import { WeatherContext } from "./appContext";
 
-
-function CityName(props) {
-const context = useContext(AppContext);
-
+function CityName() {
+const appContext = useContext(WeatherContext)
+console.log("cityName.js")
+console.log(appContext)
 return (
 
 				<div className="weatherApp__city">
 					<h2>Current weather</h2> 
-					<h1>{context.appData.name}</h1>
+					<h1>{appContext.weather.city.name}</h1>
 				</div>
 
 			)
 }
-
 
 
 export default CityName;

@@ -1,52 +1,36 @@
-import React, { Component, createContext, useEffect } from "react";
-
-export const AppContext = createContext();
+import React, { useState, useEffect } from "react";
 
 //572cbdc18f6f1a1a8e3d659a5639cd1d
 //44cc22073a3eaf46a220bb8ddffa8517
 
-class AppContextProvider extends Component {
-  //default state
-  state = {
-    units: "",
-    name: "",
-    temp: "",
-    feelsLike: "",
-    main: "",
-    mainid: "",
-    description: ""
+const WeatherContext = React.createContext();
+const apiKey = process.env.REACT_APP_WEATHER_API_KEY;
+
+const WeatherProvider = props => {
+  // set state for weather forecast data
+  const [weather, setWeather] = useState({});
+  // state for loading
+  const [loading, setLoading] = useState(true);
+  // state for units
+  const [units, setUnits] = useState("metric");
+  //state for city
+  const [city, setCity] = useState("London");
+
+  // function to change units and reload data from API
+  const unitToggler = () => {
+    setUnits(units === "metric" ? "imperial" : "metric");
+    setLoading(true);
   };
 
-  // load data method
-  loadData = input => {
-    const apiKey = process.env.REACT_APP_WEATHER_API_KEY;
-    var weatherURL = `https://api.openweathermap.org/data/2.5/forecast?q=${input}&units=${this.state.units}&APPID=${apiKey}`;
+  const handleCityChange = newCity => {
+    setCity(newCity);
+    setLoading(true);
+  };
 
-    //if first render - try to get geo location
-    if (input === "start") {
-      var lat = "";
-      var long = "";
-      if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(successFunction);
-      } else {
-        alert(
-          "It seems like Geolocation, which is required for this page, is not enabled in your browser. Please use a browser which supports it."
-        );
-      }
+  // function to uplad data from API
+  const uploadData = async () => {
+    var weatherURL = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&units=${units}&APPID=${apiKey}`;
 
-      function successFunction(position) {
-        console.log(position);
-        lat = position.coords.latitude;
-        long = position.coords.longitude;
-        console.log("Your latitude is :" + lat + " and longitude is " + long);
-      }
-
-      weatherURL = `https://api.openweathermap.org/data/2.5/forecast?lat=${Math.round(
-        lat
-      )}&lon=${Math.round(long)}&units=${this.state.units}&APPID=${apiKey}`;
-    }
-
-    // take data and move to the state
     fetch(weatherURL)
       .then(res => {
         if (res.status != "200") return;
@@ -55,46 +39,9 @@ class AppContextProvider extends Component {
         }
       })
       .then(data => {
-        console.log(data);
-        if (data.list) {
-          this.setState({
-            name: data.name,
-            weatherToday: {
-              temp: data.list[0].main.temp,
-              feelsLike: data.list[0].main.feels_like,
-              main: data.list[0].weather[0].main,
-              mainid: data.list[0].weather[0].id,
-              description: data.list[0].weather[0].description
-            },
-            weatherTomorrow: {
-              temp: data.list[7].main,
-              feelsLike: data.list[7].main.feels_like,
-              main: data.list[7].weather[0].main,
-              mainid: data.list[7].weather[0].id,
-              description: data.list[7].weather[0].description
-            },
-            weatherInTwoDays: {
-              temp: data.list[15].main,
-              feelsLike: data.list[15].main.feels_like,
-              main: data.list[15].weather[0].main,
-              mainid: data.list[15].weather[0].id,
-              description: data.list[15].weather[0].description
-            },
-            weatherInThreeDays: {
-              temp: data.list[23].main,
-              feelsLike: data.list[23].main.feels_like,
-              main: data.list[23].weather[0].main,
-              mainid: data.list[23].weather[0].id,
-              description: data.list[23].weather[0].description
-            },
-            weatherInFourDays: {
-              temp: data.list[31].main,
-              feelsLike: data.list[31].main.feels_like,
-              main: data.list[31].weather[0].main,
-              mainid: data.list[31].weather[0].id,
-              description: data.list[31].weather[0].description
-            }
-          });
+        if (data) {
+          setWeather(data);
+          setLoading(false);
         }
       })
       .catch(function(message) {
@@ -102,29 +49,28 @@ class AppContextProvider extends Component {
       });
   };
 
-  // toggle units
-  toggleUnits = () => {
-    let newUnits = this.state.units === "metric" ? "imperial" : "metric";
-    this.setState({
-      units: newUnits
-    });
-  };
+  //initial data load + update data when units or city changed
+  useEffect(() => {
+    console.log("use effect");
+    uploadData();
+  }, [units, city]);
 
-  render() {
-    return (
-      <AppContext.Provider
-        value={{
-          appData: this.state,
-          toggleUnits: this.toggleUnits,
-          changeCity: this.changeCity,
-          loadData: this.loadData
-        }}
-      >
-        {" "}
-        {this.props.children}{" "}
-      </AppContext.Provider>
-    );
-  }
-}
+  // pass data to provider to use in the apps
+  return (
+    <WeatherContext.Provider
+      value={{
+        weather,
+        city,
+        loading,
+        units,
+        unitToggler,
+        uploadData,
+        handleCityChange
+      }}
+    >
+      {props.children}
+    </WeatherContext.Provider>
+  );
+};
 
-export default AppContextProvider;
+export { WeatherContext, WeatherProvider };
