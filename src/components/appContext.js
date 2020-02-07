@@ -31,11 +31,10 @@ const WeatherProvider = (props) => {
   	uploadData()
   	console.log('city change')
   	console.log(city)
-  	console.log(newCity)
   }
 
   // function to uplad data from API
-  const uploadData = async () => {
+  const uploadData = () => {
   	console.log('load new data city' + city)
   	console.log('load new data units' + units)
   	var weatherURL = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&units=${units}&APPID=${apiKey}`;
