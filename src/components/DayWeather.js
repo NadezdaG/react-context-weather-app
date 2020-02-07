@@ -16,9 +16,12 @@ function DayWeather(props) {
 			// set image if not full code found
 			imageName = "w-"+String(showDate.weather[0].id).split("")[0];
 		}
+console.log(showDate.dt)
+		const date = new Date(showDate.dt * 1000);
 		
 		return (
 			<div className="weatherApp__card">
+			  {(props.day!==0)?date.getDate()+"."+date.getMonth():""}
 				<figure><img src={process.env.PUBLIC_URL + '/assets/images/' + imageName + '.png'} alt="" /><br />{showDate.weather[0].main}</figure>
 				<div className="weatherApp__card__content">
 					<div className="weatherApp__card__temp">{Math.round(showDate.main.temp)} &#176; {appContext.units==="metric"?"C":"F"}</div>
