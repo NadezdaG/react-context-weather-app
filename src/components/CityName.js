@@ -4,7 +4,8 @@ import { WeatherContext } from "./appContext";
 
 function CityName() {
 const appContext = useContext(WeatherContext)
-
+console.log("cityName.js")
+console.log(appContext)
 return (
 
 				<div className="weatherApp__city">
@@ -14,8 +15,6 @@ return (
 
 			)
 }
-
-
 
 
 export default CityName;

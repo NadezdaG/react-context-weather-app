@@ -9,34 +9,28 @@ const apiKey = process.env.REACT_APP_WEATHER_API_KEY;
 
 const WeatherProvider = (props) => {
 	// set state for weather forecast data
-	const [weather, setWeather] = useState([])
+	const [weather, setWeather] = useState({})
 	// state for loading 
   const [loading, setLoading] = useState(true)
   // state for units
   const [units, setUnits] = useState('metric')
   //state for city
-  const [city, setCity] = useState("London")
+  const [city, setCity] = useState('London')
 
   // function to change units and reload data from API
   const unitToggler = () => {
   	setUnits((units==="metric")?"imperial":"metric");
   	setLoading(true)
-  	uploadData()
+
   }
 
   const handleCityChange = (newCity) => {
-  	console.log('city change')
-  	console.log(city)
   	setCity(newCity)
   	setLoading(true)
-  	uploadData()
-  	console.log(city)
   }
 
   // function to uplad data from API
-  const uploadData = () => {
-  	console.log('load new data city' + city)
-  	console.log('load new data units' + units)
+  const uploadData = async () => {
   	var weatherURL = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&units=${units}&APPID=${apiKey}`;
 
 		fetch(weatherURL)
@@ -55,24 +49,15 @@ const WeatherProvider = (props) => {
       .catch(function(message) {
         console.log(message);
       });
-/*
-    try {
-      const weatherData = await fetch(weatherURL)
-      const { weather } = await weatherData.json()
-      setWeather(weather)
-      console.log(weather)
-    } catch (e) {
-      if (e) {
-        console.log(e.message, 'Try updating the API key in App.js')
-      }
-    }
-    */
+
   }
 
-  //initial data load
+  
+  //initial data load + update data when units or city changed
   useEffect(() => {
+  	console.log('use effect')
     uploadData()
-  }, [])
+  }, [units,city])
 
   // pass data to provider to use in the apps
   return (
