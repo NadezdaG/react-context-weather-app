@@ -24,12 +24,12 @@ const WeatherProvider = (props) => {
   	uploadData()
   }
 
-  const handleCityChange = (ccc) => {
-  	setCity(ccc)
+  const handleCityChange = (newCity) => {
+  	setCity(newCity)
   	setLoading(true)
   	uploadData()
   	console.log('city change')
-  	console.log(ccc)
+  	console.log(newCity)
   }
 
   // function to uplad data from API
