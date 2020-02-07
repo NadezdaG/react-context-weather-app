@@ -20,7 +20,7 @@ function DayWeather(props) {
 		return (
 			<div className="weatherApp__card">
 				<figure><img src={process.env.PUBLIC_URL + '/assets/images/' + imageName + '.png'} alt="" /><br />{showDate.weather[0].main}</figure>
-				<div className="weatherApp__card__content">{showDate.main.temp}
+				<div className="weatherApp__card__content">
 					<div className="weatherApp__card__temp">{Math.round(showDate.main.temp)} &#176; {appContext.units==="metric"?"C":"F"}</div>
 					<div className="weatherApp__card__feelslike">Feels like: {Math.round(showDate.main.feels_like)} &#176; {appContext.units==="metric"?"C":"F"}</div>
 			  </div>
