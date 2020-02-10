@@ -20,6 +20,8 @@ const WeatherProvider = props => {
 
   const [cities, setCities] = useState([]);
 
+  const [errorMessage, setErrorMessage] = useState(false);
+
   // function to change units and reload data from API
   const unitToggler = () => {
     setUnits(units === "metric" ? "imperial" : "metric");
@@ -47,10 +49,16 @@ const WeatherProvider = props => {
         if (data) {
           setWeather(data);
           setLoading(false);
+          setErrorMessage(false);
+        } else {
+          setLoading(false);
+          console.log(city);
+          setErrorMessage(true);
         }
       })
       .catch(function(message) {
         console.log(message);
+        setLoading(false);
       });
   };
 
@@ -93,7 +101,8 @@ const WeatherProvider = props => {
         handleCityChange,
         cities,
         selectedCities,
-        setSelectedCities
+        setSelectedCities,
+        errorMessage
       }}
     >
       {props.children}

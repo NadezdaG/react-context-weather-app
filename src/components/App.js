@@ -18,13 +18,19 @@ const App = () => {
             <CityInput />
             <UnitToggler />
           </header>
-          <CityName />
-          <DayWeather day="0" />
-          <div className="forecast">
-            <DayWeather day="8" />
-            <DayWeather day="16" />
-            <DayWeather day="24" />
-          </div>
+          {!appContext.errorMessage ? (
+            <>
+              <CityName />
+              <DayWeather day="0" />
+              <div className="forecast">
+                <DayWeather day="8" />
+                <DayWeather day="16" />
+                <DayWeather day="24" />
+              </div>
+            </>
+          ) : (
+            <h3>`Sorry, no results have been found for ${appContext.city}`</h3>
+          )}
         </div>
       )}
     </div>
