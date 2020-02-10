@@ -29,7 +29,7 @@ const App = () => {
               </div>
             </>
           ) : (
-            <h3>`Sorry, no results have been found for ${appContext.city}`</h3>
+            <h3>Sorry, no results have been found for {appContext.city}</h3>
           )}
         </div>
       )}
