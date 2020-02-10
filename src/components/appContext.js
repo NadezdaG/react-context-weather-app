@@ -16,21 +16,23 @@ const WeatherProvider = props => {
   //state for city
   const [city, setCity] = useState("London");
 
-  // function to change units \\ units should be added to the useEffect to reload the data
+  const [selectedCities, setSelectedCities] = useState([]);
+
+  const [cities, setCities] = useState([]);
+
+  // function to change units and reload data from API
   const unitToggler = () => {
     setUnits(units === "metric" ? "imperial" : "metric");
     setLoading(true);
   };
 
-  }
+  const handleCityChange = newCity => {
+    setCity(newCity);
+    setLoading(true);
+    setSelectedCities([]);
+  };
 
-  //function to change city \\ city should be added to the useEffect to reload the data
-  const handleCityChange = (newCity) => {
-  	setCity(newCity)
-  	setLoading(true)
-  }
-
-  // function to uplad data from API
+  // function to upload data from API
   const uploadData = async () => {
     var weatherURL = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&units=${units}&APPID=${apiKey}`;
 
@@ -52,10 +54,30 @@ const WeatherProvider = props => {
       });
   };
 
+  const getCities = _ => {
+    // select capital cities from the API
+    localStorage.getItem("cities")
+      ? setCities(JSON.parse(localStorage.getItem("cities")))
+      : fetch("https://restcountries.eu/rest/v2/all")
+          .then(res => res.json())
+          .then(data => {
+            if (data) {
+              const cities = data.map(city => city.capital);
+              // let regex = new RegExp(inputText, "i");
+              // filter cities and set new list
+              setCities(cities);
+              localStorage.setItem("cities", JSON.stringify(cities));
+            }
+          })
+          .catch(function(message) {
+            console.log(message);
+          });
+  };
+
   //initial data load + update data when units or city changed
   useEffect(() => {
-    console.log("use effect");
     uploadData();
+    getCities();
   }, [units, city]);
 
   // pass data to provider to use in the apps
@@ -68,7 +90,10 @@ const WeatherProvider = props => {
         units,
         unitToggler,
         uploadData,
-        handleCityChange
+        handleCityChange,
+        cities,
+        selectedCities,
+        setSelectedCities
       }}
     >
       {props.children}
