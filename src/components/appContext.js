@@ -40,7 +40,7 @@ const WeatherProvider = props => {
 
     fetch(weatherURL)
       .then(res => {
-        if (res.status != "200") return;
+        if (res.status !== 200) return;
         else {
           return res.json();
         }
