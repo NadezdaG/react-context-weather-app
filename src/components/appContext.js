@@ -71,8 +71,6 @@ const WeatherProvider = props => {
           .then(data => {
             if (data) {
               const cities = data.map(city => city.capital);
-              // let regex = new RegExp(inputText, "i");
-              // filter cities and set new list
               setCities(cities);
               localStorage.setItem("cities", JSON.stringify(cities));
             }
