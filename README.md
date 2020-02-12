@@ -10,9 +10,8 @@ Problems to solve:
 2) update context from api - done
 3) update context using toggle - done
 4) load images depending on text - done
-5) load city using Location - done
-6) input text and search city by text - done
-7) Forecast for 3 days
+5) input text and search city by text - done
+6) Forecast for 3 days - done
 
 #############
 https://openweathermap.org/
