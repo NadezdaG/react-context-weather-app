@@ -9,7 +9,7 @@ const App = () => {
   const appContext = useContext(WeatherContext);
   const { loading } = appContext;
   return (
-    <div id="weatherApp">
+    <div id="weatherApp"><div class='wrapper'>
       {loading ? (
         <h1 className="text-center">.......loading......</h1>
       ) : (
@@ -33,7 +33,7 @@ const App = () => {
           )}
         </div>
       )}
-    </div>
+    </div></div>
   );
 };
 
