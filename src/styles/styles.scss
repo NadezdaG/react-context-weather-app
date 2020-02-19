@@ -41,7 +41,7 @@ html {
   background: rgba($color-black,0.8);
   color: $color-white;
   .wrapper {
-  		padding:2em 2em 5em;
+  		padding:2em 2em 4em;
   }
 	header {
     padding: 0em;
@@ -69,5 +69,13 @@ html {
  width:95%;
  max-width:none;
 	}
+}
+
+footer {
+  padding-top:3em;
+  color:white;
+  text-align:center;
+  font-size:12px;
+  a {color:white;text-decoration:underline;}
 }
 
