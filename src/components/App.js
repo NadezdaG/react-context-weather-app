@@ -36,7 +36,7 @@ const App = () => {
 
     </div>
     </div>
-    <footer>app was made for learning purposes in the colaboration with <a href="https://github.com/Marco981" title="Marco web developer">Marco</a></footer>
+    <footer>app was made for learning purposes in the colaboration with <a href="https://github.com/Marco981" title="Marco web developer">Marco</a><br /><a href="https://github.com/NadezdaG/react-context-weather-app" title="github link">Github link</a></footer>
     </div>
   );
 };
