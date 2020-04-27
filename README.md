@@ -1,3 +1,6 @@
+URL to check ready app: http://nadezda-test.herokuapp.com/build
+
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 #############
